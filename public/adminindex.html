@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="css/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="css/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/default.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="js/outlook2.js"></script>
+    
+    <script type="text/javascript">
+		 var _menus = {
+		                 "menus":[
+						           {"menuid":"1","icon":"icon-role","menuname":"租户管理",
+							      "menus":[
+									{"menuid":"11","menuname":"企业管理","icon":"icon-log","url":"#"},
+									{"menuid":"12","menuname":"报表统计","icon":"icon-log","url":"#"},
+								    ]},
+									{"menuid":"2","icon":"icon-set","menuname":"系统配置",
+							      "menus":[
+									{"menuid":"21","menuname":"用户管理","icon":"icon-log","url":"/adminuser"},
+									{"menuid":"22","menuname":"日志管理","icon":"icon-log","url":""},
+									{"menuid":"23","menuname":"数据备份","icon":"icon-log","url":""},
+									{"menuid":"24","menuname":"个人设置","icon":"icon-log","url":"/adminperson"},
+									]}
+				]};
+	
+	</script>
+    
+    
+</head>
+
+<body class="easyui-layout">
+    	<div region="north" style="height:50px;background: #D2E0F2;font-family："微软雅黑","黑体"">
+        <span style="padding-left:0px; font-size: 20px; color:#000000 ">
+        <img src="images/cloud.jpg" width="50" height="45" align="absmiddle"/>&nbsp;&nbsp&nbsp;棉花糖管理后台</span>
+        
+       <span style="float:right; padding-right:20px;padding-top:10px"><a class="easyui-linkbutton" iconCls="icon-redo" href="javascript:void(0)" onclick="logout()">注销</a></span>
+       </div>
+        
+        <div region="west" hide="true" split="true" title="导航菜单" style="width:180px;" id="west">
+                <!--<div title="租户管理" style="padding:10px;">
+					<ul>
+                    	<li><a href="">企业管理</a></li>
+                        <li><a href="">报表统计</a></li>
+                    </ul>
+                </div>
+                <div title="系统设置" style="padding:10px;">
+					<ul>
+                    	<li>日志管理</li>
+                        <li>邮箱管理</li>
+                        <li>用户管理</li>
+                    </ul>
+                </div>
+        	</div>-->
+            <div id="nav" class="easyui-accordion" fit="true" border="false"></div>
+        </div>
+        
+        <div id="mainPanle" region="center" style="background: #eee; overflow-y:hidden">
+            <div id="tabs" class="easyui-tabs"  fit="true" border="false" >
+                <div title="仪表盘" style="padding:18px;overflow:hidden;" >
+                    <h1 style="font-size:24px;">TBD</h1>
+                </div>
+            </div>
+        </div>
+        
+        <div region="south" split="true" style="height: 30px; background: #D2E0F2;">
+        	<div class="footer">Copyright © 棉花糖</div>
+        </div>
+</body>
+</html>

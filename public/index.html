@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="css/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="css/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/default.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="js/outlook2.js"></script>
+    
+    <script type="text/javascript">
+ var _menus = {
+		                 "menus":[
+						           {"menuid":"1","icon":"icon-role","menuname":"閫氳褰曠鐞�,
+							      "menus":[
+									{"menuid":"11","menuname":"閮ㄩ棬绠＄悊","icon":"icon-log","url":"../address/dept.html"},
+									{"menuid":"12","menuname":"鍛樺伐绠＄悊","icon":"icon-log","url":"../address/employee.html"},
+									{"menuid":"13","menuname":"鎶ヨ〃缁熻","icon":"icon-log","url":""},
+								    ]},
+									{"menuid":"2","icon":"icon-set","menuname":"绯荤粺閰嶇疆",
+							      "menus":[
+									{"menuid":"21","menuname":"鐢ㄦ埛绠＄悊","icon":"icon-log","url":""}]}
+				]};
+	</script>
+    
+    
+</head>
+
+<body class = "easyui-layout">
+    <div region = "north" split="true" border="false" style = "height:50px;
+    	background:url(../../res/images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;"
+        line-height: 20px;color: #fff; font-family: Verdana, 寰蒋闆呴粦,榛戜綋">
+        <span style="float:right; padding-right:20px;" class="head">娆㈣繋<a href="#" id="loginOut">瀹夊叏閫�嚭</a></span>
+    	<span style="padding-left:10px; font-size: 16px; ">
+        <img src="../../res/images/blocks.gif" width="20" height="20" align="absmiddle" />鏅轰簯OA鍚庡彴绠＄悊</span>
+    </div>
+    
+    <div region="south" split="true" style="height: 30px; background: #D2E0F2;">
+    	<div class="footer">Copyright 漏 妫夎姳绯�/div>
+    </div>
+    
+    <div region="west" hide="true" split="true" title="瀵艰埅鑿滃崟" style="width:180px;" id="west">
+      <div id="nav" class="easyui-accordion" fit="true" border="false"></div>
+    </div>
+    
+
+    <div id="mainPanle" region="center" style="background: #eee; overflow-y:hidden">
+      	<div id="tabs" class="easyui-tabs"  fit="true" border="false" >
+    		<div title="棣栭〉" style="padding:20px;overflow:hidden; color:red; " >
+          		<h1 style="font-size:24px;">绉诲姩OA绠＄悊绯荤粺</h1>
+        	</div>
+  		</div>
+    </div>
+    
+    <div region="east" title="鍏朵粬" split="true" style="width:180px;overflow:hidden;">
+      <div class="easyui-calendar"></div>
+    </div>
+      
+</body>
+</html>

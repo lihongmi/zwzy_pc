@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="css/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/default.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
+<style type="text/css">
+	#fm{
+            margin:0;
+            padding:10px 30px;
+        }
+	.ftitle{
+		font-size:14px;
+		font-weight:bold;
+		padding:5px 0;
+		margin-bottom:10px;
+		border-bottom:1px solid #ccc;
+	}
+	.fitem{
+		margin-bottom:5px;
+		margin: 10px;
+	}
+	.fitem label{
+		display:inline-block;
+		width:80px;
+	}
+	.fitem input{
+		margin: 10px;
+		width:160px;
+	}
+</style>
+
+<script type="text/javascript">
+		$(function(){
+				/*$.get("http://localhost:3000/sessionContent", function(data){
+						alert(data); 
+  						var obj = jQuery.parseJSON(data);
+  						
+						$('#curusrname').text(obj.username);
+						$('#curactorname').text(obj.actorname);
+				});*/
+						
+				$.ajax({
+					type:"GET",
+					datatype: "JSON",
+  					url: "http://localhost:3000/sessionContent",
+  					
+  					success: function(data){
+  						
+						var obj = jQuery.parseJSON(data);
+						console.log(obj);				
+						$('#curusrname').append(obj.username);
+						$('#curactorname').append(obj.actorname);
+					},
+					
+					error: function () {  
+                   		$('#curusrname').append("未知");
+						$('#curactorname').append("未知"); 
+                	}  
+				});
+			})
+
+				
+			
+		function update(){		
+			$('#dlg').dialog('open').dialog('setTitle','更新密码');
+		}
+		
+		function check(){
+			$('#fm').form('clear');
+			var str = "修改成功";
+			$('#result').text(str);
+		}
+</script>
+</head>
+<body>
+
+	<!-- 个人信息 -->
+	<div id="p" class="easyui-panel" title="个人信息" iconCls="icon-man" style="width:800px;height:200px;padding:10px;">
+		<div class="fitem">
+			<label>用户名:</label>
+			<label id = "curusrname">用户名</label>
+		</div>
+        
+        <div class="fitem">
+        	<label>角&nbsp;&nbsp;&nbsp;色</label>
+            <label id = "curactorid">角色</label>
+        </div>
+        
+        <div class="ftitle"></div>
+        
+        <div id="dlg-buttons">
+        	<a href="javascript:void(0)" class="easyui-linkbutton c6" onclick="update()" data-options="iconCls:'icon-lock'">修改密码</a>
+        </div>   
+    </div>
+    
+    <!-- 登陆记录 -->
+    <div style="margin-top:20px">
+  <table id="tt" class="easyui-datagrid" style="width:800px;height:250px;margin:10px"
+            url="#"
+            title="登陆信息" iconCls="icon-save"
+            rownumbers="true" pagination="true">
+        <thead>
+            <tr>
+                <th field="用户名" width="100" align="center">用户名</th>
+                <th field="登陆时间" width="200" align="center">登陆时间</th>
+                <th field="注销时间" width="200" align="center">注销时间</th>
+            </tr>
+        </thead>
+    </table>                  
+    </div>
+
+    <!-- 修改密码 -->
+     <div id="dlg" class="easyui-dialog" style="width:400px;padding:5px" closed="true" buttons="#dlg-buttons-check">
+     <form id="fm">
+     		 <div class="fitem">
+                <label>当前密码:</label>
+                <input id="password" name="password" validType= "length[6,32]" class="easyui-validatebox" required="true" type="password" value=""/>
+            </div>
+             <div class="fitem">
+                <label>新密码:</label>
+                <input id="password" name="password" validType= "length[6,32]" class="easyui-validatebox" required="true" type="password" value=""/>
+            </div>
+            <div class="fitem">
+                <label>新密码确认:</label>
+                <input type="password" name="repassword" id="repassword" required="true" class="easyui-validatebox"  validType="equalTo['#password']" invalidMessage="两次输入密码不匹配"/>
+            </div>
+            
+            <div id = "result" style="color:#F00,font-size:12px"></div>
+     	</form>
+     </div>
+     
+         
+    <div id="dlg-buttons-check">
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" onclick="check()" style="width:90px"">更新</a>
+    </div>
+    
+</body>
+</html>

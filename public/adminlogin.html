@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="css/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/default.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
+    
+    <script type="text/javascript">
+    
+        function login(){
+			var inputemail = document.getElementById("inputemail").value;
+			var passwrod   = document.getElementById("password").value;
+			
+    		$('#ff').form('submit',{
+    		    		url:"loginaction?inputemail=" + inputemail + "&password=" + password,
+		
+    		success:function(data){
+    				var obj = jQuery.parseJSON(data);    				
+    				if("100" == obj.result){
+						$.messager.alert('提示',obj.reason);
+    				}else{
+    					location='http://localhost:3000/adminindex';
+    				}
+    			}       	
+    		});
+    	}
+    
+     function cleardata(){
+     	$('#fm').form('clear');
+      }
+    
+	 function newUser(){
+            $('#dlg').dialog('open').dialog('setTitle','欢迎注册云OA');
+            $('#fm').form('clear');
+            url = '#';
+     }
+	 
+	$(document).ready(function(){
+				 $.extend($.fn.validatebox.defaults.rules, {
+		 	
+        		/*必须和某个字段相等*/
+        			equalTo: { 
+						validator: function (value, param) { 
+						return $(param[0]).val() == value; }, message: '字段不匹配' }
+       				});
+	});
+</script>
+
+<style type="text/css">
+	#fm{
+            margin:0;
+            padding:10px 30px;
+        }
+	.ftitle{
+		font-size:14px;
+		font-weight:bold;
+		padding:5px 0;
+		margin-bottom:10px;
+		border-bottom:1px solid #ccc;
+	}
+	.fitem{
+		margin-bottom:5px;
+	}
+	.fitem label{
+		display:inline-block;
+		width:80px;
+	}
+	.fitem input{
+		width:160px;
+	}
+</style>
+    
+    
+</head>
+
+
+
+<body>
+	<div id = "logincircle" style="position:absolute;top:30%;left:35%">
+    <!-- 老用户登陆div-->
+        <div class="easyui-panel" title="登&nbsp;&nbsp;&nbsp陆" style="width:400px;height:200px;padding:10px;">
+        <div style="padding:10px 60px 20px 60px">
+        <form id="ff" method="post">
+            <table width="280" border="0" cellpadding="5" cellspacing="0">
+                <tr>
+                    <td>企业邮箱:</td>
+                    <td><input class="easyui-textbox" type="text" id = "inputemail" name="inputemail" ></input></td>
+                </tr>
+                <tr>
+                    <td>密&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp码:</td>
+                    <td><input class="easyui-textbox" type="password" id = "password" name="password"></input></td>
+                </tr>
+                <tr>
+                	<td>&nbsp;</td>
+                </tr>
+            </table>
+        </form>
+        <div style="text-align:right;padding-right:25px"><a class="easyui-linkbutton" iconCls="icon-ok" href="javascript:void(0)" onclick="login()">登录</a>
+            
+            <a class="easyui-linkbutton" iconCls="icon-cancel" href="javascript:void(0)" onclick="cleardata()">重置</a>                         
+        </div>
+
+        </div>
+    </div>
+    
+    
+    </div>
+	
+</body>
+</html>
