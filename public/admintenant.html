@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="css/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/default.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
+<title>用户管理</title>
+
+ <script type="text/javascript">
+ 	    var url;
+ 	    
+		function newUser(){
+            $('#dlg').dialog('open').dialog('setTitle','新增企业租户');
+            $('#fm').form('clear');
+            url = '/addtenant';
+            }
+		
+        function editUser(){
+            var row = $('#dg').datagrid('getSelected');
+            if (row){
+                $('#dlg').dialog('open').dialog('setTitle','编辑');
+                $('#fm').form('load',row);               
+                url = "/updatetenant";
+            }
+        }
+		
+		function destroyUser(){
+            var row = $('#dg').datagrid('getSelected');
+            if (row){
+                $.messager.confirm('提示','是否确认删除?',function(r){
+                    if (r){
+                        $.post('#',{id:row.id},function(result){
+                        
+                        $('#dg').datagrid('reload'); 
+                        
+                        /*alert(result);
+                        	var obj = jQuery.parseJSON(result);
+                        alert(obj);
+                            if (result.result == "success"){
+                                $('#dg').datagrid('reload');    // reload the user data
+                            } else {
+                                $.messager.show({    // show error message
+                                    title: '错误',
+                                    msg: result.errMsg
+                                });
+                            }*/
+                        },'json');
+                    }
+                });
+            }
+        }
+        
+        function saveUser(){
+            $('#fm').form('submit',{
+                url: url,
+                success: function(result){
+                    var result = eval('('+result+')');
+                    if (result.errorMsg){
+                        $.messager.show({
+                            title: 'Error',
+                            msg: result.errorMsg
+                        });
+                    } else {
+                        $('#dlg').dialog('close');        
+                        $('#dg').datagrid('reload');    
+                    }
+                }
+            });
+        }
+        
+		//自动生成密码
+		function password(length, special) {
+  var iteration = 0;
+  var password = "";
+  var randomNumber;
+  if(special == undefined){
+      var special = false;
+  }
+  while(iteration < length){
+    randomNumber = (Math.floor((Math.random() * 100)) % 94) + 33;
+    if(!special){
+      if ((randomNumber >=33) && (randomNumber <=47)) { continue; }
+      if ((randomNumber >=58) && (randomNumber <=64)) { continue; }
+      if ((randomNumber >=91) && (randomNumber <=96)) { continue; }
+      if ((randomNumber >=123) && (randomNumber <=126)) { continue; }
+    }
+    iteration++;
+    password += String.fromCharCode(randomNumber);
+  }
+  return password;
+}
+
+	function addpassword(){
+		console.log(password(8));
+		//$("#testpass").append(password(8));
+		//$("#testpass").val("fsdfa");
+		//document.getElementById("testpass").value="4214";
+	}
+	
+	  function cleardata(){
+     	$('#fm').form('clear');
+      }
+ 
+ </script>
+
+<style type="text/css">
+	#fm{
+            margin:0;
+            padding:10px 30px;
+        }
+	.ftitle{
+		font-size:14px;
+		font-weight:bold;
+		padding:5px 0;
+		margin-bottom:10px;
+		border-bottom:1px solid #ccc;
+	}
+	.fitem{
+		margin-bottom:5px;
+	}
+	.fitem label{
+		display:inline-block;
+		width:80px;
+	}
+	.fitem input{
+		margin: 5px;
+		width:160px;
+	}
+</style>
+
+
+</head>
+<body> 
+    <table id="dg" title="租户列表" class="easyui-datagrid" style="width:700px;height:450px"
+            url="/gettenant"
+            toolbar="#toolbar" pagination="true"
+            rownumbers="true" fitColumns="true" singleSelect="true">
+        <thead>
+            <tr>
+                <th field="ID" width="50" align="center">企业ID</th>            
+                <th field="password" width="50" align="center">企业密码</th>
+                <th field="entername" width="50" align="center">企业名称</th>
+            </tr>
+        </thead>
+    </table>
+    <div id="toolbar">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">新增</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">编辑</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">删除</a>
+    </div>
+    
+
+
+ <div id="dlg" class="easyui-dialog" style="width:450px;height:250px;padding:10px 20px"
+            closed="true" buttons="#dlg-buttons">
+            
+    		<div class="easyui-panel" style="padding:5px;">
+      	<form id="fm" method="post" novalidate>
+      		
+      		<div class="fitem">
+			<label>企业ID</label>
+			<input class="easyui-textbox" type="text" id = "ID" name="ID">
+			</div>
+     
+            <div class="fitem">
+			<label>密码:</label>
+			<input class="easyui-textbox" type="text" id="password" name = "password">	
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-lock'" style="width:40px" plain="true" onClick="addpassword()"></a>
+			</div>
+            
+            <div class="fitem">
+			<label>企业名称:</label>
+			<input class="easyui-textbox" type="text" name="entername">
+			</div>
+            
+			</div>
+            <div class="ftitle"></div>
+        </form>
+                        
+        <div id = dlg-buttons">
+<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick ="saveUser()" style="width:120px">保存</a>
+<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-back'" onclick = "cleardata()" style="width:120px;float:right">重置</a>
+        </div>           
+                        
+            </div>            
+ </div>
+
+
+
+</body>
+</html>

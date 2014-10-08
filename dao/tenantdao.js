@@ -49,8 +49,8 @@ exports.addTenant = function(id,password,entername,callback){
 }
 
 exports.findTenant = function(callback){
-	tenantModel.find({},function(err,users){
-		return callback(err,users);
+	tenantModel.find({},function(err,tenants){
+		return callback(err,tenants);
 	});
 }
 

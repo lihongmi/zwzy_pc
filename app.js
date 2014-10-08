@@ -70,6 +70,9 @@ app.post('/addadminuser',routes.addadminuser);
 app.post('/delminuser',routes.deladminuser);
 app.post('/updateadminuser',routes.updateadminuser);
 
+app.get('/admintenant',routes.admintenant);
+app.post('/gettenant',routes.gettenant);
+
 
 //外网用户业务
 app.post('/register',routes.register);

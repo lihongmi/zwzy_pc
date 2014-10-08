@@ -67,8 +67,13 @@ exports.adminuser = function(req,res){
 	res.sendfile('public/adminuser.html');
 }
 
+exports.admintenant = function(req,res){
+	res.sendfile('public/admintenant.html');
+}
+
 var adminuser = require('../dao/adminuserdao');
 var auhandler = require('../app/adminuserhandler');
+var tenant    = require('../dao/tenantdao');
 
 exports.getadminuser = function(req,res){
 	adminuser.findUser({},function(err, users){
@@ -80,6 +85,13 @@ exports.getadminuser = function(req,res){
 exports.addadminuser = function(req,res){
 	auhandler.addadminuser(req);
 	res.json({result:'001'});
+}
+
+exports.gettenant = function(req,res){
+	tenant.findTenant(function(err,tenants){
+				
+		res.json(tenants);
+	});
 }
 
 exports.deladminuser = function(req,res){
